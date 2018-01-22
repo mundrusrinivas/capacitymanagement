@@ -143,7 +143,7 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a  href="@Url.Action("Index", "Home",null)">
+                        <a href="@Url.Action("Index", "Home",null)">
                             <i class="icon_house_alt"></i>
                             <span>Dashboard</span>
                         </a>
@@ -165,16 +165,19 @@
             </div>
         </aside>
         <!--sidebar end-->
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Capacity Management copyrights</p>
-            </footer>
-        </div>
+        <section id="main-content">
+            <div class="container body-content">
+                @RenderBody()
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Capacity Management copyrights</p>
+                </footer>
+            </div>
+            </section>
+               
+          
+            
+        </section>
 </body>
 </html>
