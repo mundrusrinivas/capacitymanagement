@@ -1,0 +1,157 @@
+﻿@using CapacityManagement.Models;
+@{
+    ViewBag.Title = "Monthly";
+}
+
+<style type="text/css">
+    .edit-mode {
+    }
+
+    .edit-user {
+    }
+
+        .edit-user display-mode {
+        }
+
+    .save-user edit-mode {
+    }
+
+    .display-mode {
+    }
+
+    .cancel-user {
+    }
+
+    .webgrid-table {
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        width: 650px;
+        display: table;
+        border-collapse: collapse;
+        border: solid px #C5C5C5;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: 1px solid #C5C5C5;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header, .webgrid-header a {
+        background-color: #E3E3E3;
+        color: black;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        background-color: #F5F5F5;
+        padding: 3px 7px 2px;
+    }
+
+    .col1Width {
+        width: 50px;
+    }
+
+    .col2Width {
+        width: 200px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('.edit-mode').hide();
+        $('.edit-user, .cancel-user').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            tr.find('.edit-mode, .display-mode').toggle();
+        });
+
+        $('.save-user').on('click', function () {
+            var tr = $(this).parents('tr:first');
+            var ShrikangeHC = tr.find("#ShrikangeHC").val();
+            var HeadCountReq = tr.find("#HeadCountReq").val();
+            var ActualVEs = tr.find("#ActualVEs").val();
+            var PlannedReq = tr.find("#PlannedReq").val();
+            var Shortage = tr.find("#Shortage").val();
+            var Month = tr.find("#Month").html();
+            tr.find("#lblShrikangeHC").text(ShrikangeHC);
+            tr.find("#lblHeadCountReq").text(HeadCountReq);
+            tr.find("#lblActualVEs").text(ActualVEs);
+            tr.find("#lblPlannedReq").text(PlannedReq);
+            tr.find("#lblShortage").text(Shortage);
+            tr.find('.edit-mode, .display-mode').toggle();
+            var HeadCountAnalysisModel =
+            {
+                "Month": Month,
+                "HeadCountReq": HeadCountReq,
+                "ShrikangeHC": ShrikangeHC,
+                "ActualVEs": ActualVEs,
+                "PlannedReq": PlannedReq,
+                "Shortage": Shortage
+            };
+            $.ajax({
+                url: '/Monthly/ChangeHeadCountAnalysis/',
+                data: JSON.stringify(HeadCountAnalysisModel),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+               
+                }
+            });
+
+        });
+    })
+</script>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+            <li><i class="fa fa-table"></i>Monthly Update</li>
+        </ol>
+    </div>
+</div>
+
+@{
+    var grid = new WebGrid(source: ViewBag.HeadCountAnalysis, canPage: false );
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <a class="btn btn-success btn-lg" href="@Url.Action("Index", "Home",null)" title="Bootstrap 3 themes generator">Dashboard</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Head Count Analysis
+            </header>
+            @grid.GetHtml(
+        tableStyle: "table table-striped table-advance table-hover",
+        mode: WebGridPagerModes.All,
+        columns:
+            grid.Columns(
+             grid.Column("Month", format: @<text>  <span class="display-mode">@item.Month </span> <label id="Month" class="edit-mode">@item.Month</label> </text>, style: "col1Width"),
+             grid.Column("HeadCountReq", "Head Count Req", format: @<text>  <span class="display-mode"> <label id="lblHeadCountReq">@item.HeadCountReq</label> </span> <input type="text" id="HeadCountReq" value="@item.HeadCountReq" class="edit-mode" /></text>, style: "col2Width"),
+             grid.Column("Shrikange", "Shrikange", format: @<text>  <span class="display-mode"> <label id="lblShrikangeHC">@item.ShrikangeHC</label> </span> <input type="text" id="ShrikangeHC" value="@item.ShrikangeHC" class="edit-mode" /></text>, style: "col2Width"),
+             grid.Column("ActualVEs", "Actual VEs", format: @<text>  <span class="display-mode"> <label id="lblActualVEs">@item.ActualVEs</label> </span> <input type="text" id="ActualVEs" value="@item.ActualVEs" class="edit-mode" /></text>, style: "col2Width"),
+             grid.Column("PlannedReq", "Planned Req", format: @<text>  <span class="display-mode"> <label id="lblPlannedReq">@item.PlannedReq</label> </span> <input type="text" id="PlannedReq" value="@item.PlannedReq" class="edit-mode" /></text>, style: "col2Width"),
+             grid.Column("Shortage", "Shortage", format: @<text>  <span class="display-mode"> <label id="lblShortage">@item.Shortage</label> </span> <input type="text" id="Shortage" value="@item.Shortage" class="edit-mode" /></text>, style: "col2Width"),
+             grid.Column("Action", format: @<text>
+                    <button class="edit-user display-mode">Edit</button>
+                    <button class="save-user edit-mode">Save</button>
+                    <button class="cancel-user edit-mode">Cancel</button>
+            </text>, style: "col3Width", canSort: false)
+           ))
+            
+        </section>
+    </div>
+</div>

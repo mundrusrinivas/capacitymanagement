@@ -1,4 +1,6 @@
-﻿@{
+﻿@using CapacityManagement.Models;
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -51,120 +53,30 @@
                 type: "bar",
                 showInLegend: true,
                 name: "Headcount Required",
-                dataPoints: [
-                    { y: 1192, label: "Jan" },
-                    { y: 1865, label: "Feb" },
-                    { y: 2675, label: "Mar" },
-                    { y: 2675, label: "Apr" },
-                    { y: 2675, label: "May" },
-                    { y: 3050, label: "Jun" },
-                    { y: 3050, label: "Jul" },
-                    { y: 3050, label: "Aug" },
-                    { y: 3050, label: "Sep" },
-                    { y: 3050, label: "Oct" },
-                    { y: 3050, label: "Nov" },
-                    { y: 3050, label: "Dec" }
-                ],
-
-                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
-                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                dataPoints: @Html.Raw(ViewBag.DataPoints1),
             },
-            { //1.528	2.391	3.429	3.429	3.429	3.910	3.910	3.910	3.910	3.910	3.910	3.910
-
-                type: "bar",
+            {   type: "bar",
                 showInLegend: true,
                 name: "22% Shrikange Headcount",
-                dataPoints: [
-                    { y: 1528, label: "Jan" },
-                    { y: 2391, label: "Feb" },
-                    { y: 3429, label: "Mar" },
-                    { y: 3429, label: "Apr" },
-                    { y: 3429, label: "May" },
-                    { y: 3910, label: "Jun" },
-                    { y: 3910, label: "Jul" },
-                    { y: 3910, label: "Aug" },
-                    { y: 3910, label: "Sep" },
-                    { y: 3910, label: "Oct" },
-                    { y: 3910, label: "Nov" },
-                    { y: 3910, label: "Dec" }
-                ],
-
-                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
-                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                dataPoints: @Html.Raw(ViewBag.DataPoints2),
             },
             {
-                //1.356	2.382	4.204	4.728	4.786	5.205	5.154	5.115	5.065	5.015	4.977	4.940
-
-
                 type: "bar",
                 showInLegend: true,
                 name: "Actual VEs (3% Attrition)",
-                dataPoints: [
-                   { y: 1356, label: "Jan" },
-                    { y: 2382, label: "Feb" },
-                    { y: 4204, label: "Mar" },
-                    { y: 4728, label: "Apr" },
-                    { y: 4786, label: "May" },
-                    { y: 5205, label: "Jun" },
-                    { y: 5154, label: "Jul" },
-                    { y: 5115, label: "Aug" },
-                    { y: 5065, label: "Sep" },
-                    { y: 5015, label: "Oct" },
-                    { y: 4977, label: "Nov" },
-                    { y: 4940, label: "Dec" }
-                ],
-
-                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
-                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                dataPoints: @Html.Raw(ViewBag.DataPoints3),
             },
             {
-                // 282	1.172	2.054	720	220	571	114	125	111	110	121	120
-
                 type: "bar",
                 showInLegend: true,
                 name: "Planned Recuritment",
-                dataPoints: [
-                   { y: 282, label: "Jan" },
-                    { y: 1172, label: "Feb" },
-                    { y: 2054, label: "Mar" },
-                    { y: 720, label: "Apr" },
-                    { y: 220, label: "May" },
-                    { y: 571, label: "Jun" },
-                    { y: 114, label: "Jul" },
-                    { y: 125, label: "Aug" },
-                    { y: 111, label: "Sep" },
-                    { y: 110, label: "Oct" },
-                    { y: 121, label: "Nov" },
-                    { y: 120, label: "Dec" }
-                ],
-
-                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
-                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                dataPoints: @Html.Raw(ViewBag.DataPoints4),
             },
-             {
-                 // 172	109	74	71	69	85	84	85	82	83	79	81
-
-
+            {
                  type: "bar",
                  showInLegend: true,
                  name: "Shortage",
-                 dataPoints: [
-                    { y: 172, label: "Jan" },
-                     { y: 109, label: "Feb" },
-                     { y: 74, label: "Mar" },
-                     { y: 71, label: "Apr" },
-                     { y: 69, label: "May" },
-                     { y: 85, label: "Jun" },
-                     { y: 84, label: "Jul" },
-                     { y: 85, label: "Aug" },
-                     { y: 82, label: "Sep" },
-                     { y: 83, label: "Oct" },
-                     { y: 79, label: "Nov" },
-                     { y: 81, label: "Dec" }
-                 ],
-
-                 //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
-                 //dataPoints: @Html.Raw(ViewBag.DataPoints),
+                 dataPoints: @Html.Raw(ViewBag.DataPoints5),
              }
 
             ]
@@ -291,6 +203,7 @@
     </div>
 </div>
 
+
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <div class="info-box blue-bg">
@@ -332,6 +245,12 @@
     </div>
     <!--/.col-->
 
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <a class="btn btn-success btn-lg" href="@Url.Action("Index", "Monthly",null)" title="Bootstrap 3 themes generator">EDIT</a>
+    </div>
 </div>
 <div class="row">
     <!-- chart morris start -->
